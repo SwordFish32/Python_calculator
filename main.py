@@ -35,38 +35,39 @@ if option == 'help':
   print('You can ask to exit: exit')
 elif option == 'exit':
   print('Exiting...')
+  exit(1)
 elif option == 'add':
   add(number1, number2)
-  break
+  exit(1)
 elif option == 'subtract':
   subtract(number1, number2)
-  break
+  exit(1)
 elif option == 'multiply':
   multiply(number1, number2)
-  break
+  exit(1)
 elif option == 'divide':
   divide(number1, number2)
-  break
+  exit(1)
 elif option == 'random':
   number1 = random.randint(1,10)
   number2 = random.randint(1,10)
   print(number1,"and",number2)
-  break
+  exit(1)
 elif option == 'chatgpt':
-  generator = pipeline('text-generation', model='gpt2')
-set_seed(42)
+    generator = pipeline('text-generation', model='gpt2')
+    set_seed(42)
 
-def chatbot_response(prompt):
-  """Generates a response to a user prompt using the GPT-2 model."""
-  response = generator(prompt, max_length=150, num_return_sequences=1)
-  return response[0]['generated_text']
+    def chatbot_response(prompt):
+        """Generates a response to a user prompt using the GPT-2 model."""
+        response = generator(prompt, max_length=150, num_return_sequences=1)
+        return response[0]['generated_text']
 
-while True:
-  user_input = input("You: ")
-  if user_input.lower() == 'exit':
-    break
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == 'exit':
+            break
 
-  bot_response = chatbot_response(user_input)
-  print("Bot:", bot_response)
+        bot_response = chatbot_response(user_input)
+        print("Bot:", bot_response)
 else:
-  print('invalid input')
+    print('invalid input')
